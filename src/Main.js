@@ -651,13 +651,6 @@ var PS = {};
       };
   };
 
-  exports.fill = function(ctx) {
-      return function() {
-          ctx.fill();
-          return ctx;
-      };
-  };
-
   exports.lineTo = function(ctx) {
       return function(x) {
           return function(y) {
@@ -727,17 +720,6 @@ var PS = {};
   var getCanvasElementById = function (elId) {
       return $foreign.getCanvasElementByIdImpl(elId, Data_Maybe.Just.create, Data_Maybe.Nothing.value);
   };
-  var fillPath = function (ctx) {
-      return function (path) {
-          return function __do() {
-              var v = $foreign.beginPath(ctx)();
-              var v1 = path();
-              var v2 = $foreign.fill(ctx)();
-              return v1;
-          };
-      };
-  };
-  exports["fillPath"] = fillPath;
   exports["getCanvasElementById"] = getCanvasElementById;
   exports["strokePath"] = strokePath;
   exports["clearRect"] = $foreign.clearRect;
@@ -947,36 +929,6 @@ var PS = {};
           };
       };
   };
-  var fill = function (v00) {
-      return function (v01) {
-          return function (v10) {
-              return function (v11) {
-                  return function (v20) {
-                      return function (v21) {
-                          return function (v30) {
-                              return function (v31) {
-                                  return function (ctx) {
-                                      return function __do() {
-                                          var v = Data_Array_ST.emptySTArray();
-                                          var v1 = Graphics_Canvas.fillPath(ctx)(function __do() {
-                                              var v1 = Graphics_Canvas.moveTo(ctx)(v00)(v01)();
-                                              var v2 = Graphics_Canvas.lineTo(ctx)(v10)(v11)();
-                                              var v3 = Graphics_Canvas.lineTo(ctx)(v20)(v21)();
-                                              var v4 = Graphics_Canvas.lineTo(ctx)(v30)(v31)();
-                                              var v5 = Graphics_Canvas.closePath(ctx)();
-                                              return Data_Functor["void"](Control_Monad_Eff.functorEff)(Data_Array_ST.pushSTArray(v)(1))();
-                                          })();
-                                          return Data_Functor["void"](Control_Monad_Eff.functorEff)(Data_Array_ST.pushSTArray(v)(1))();
-                                      };
-                                  };
-                              };
-                          };
-                      };
-                  };
-              };
-          };
-      };
-  };
   var drawCube = function (vertices) {
       return function (faces) {
           return function (ctx) {
@@ -1008,8 +960,7 @@ var PS = {};
                           return Data_Functor["void"](Control_Monad_Eff.functorEff)(Data_Array_ST.pushSTArray(v1)([ pix0, pix1 ]))();
                       };
                   }))();
-                  var v2 = Graphics_Canvas.setStrokeStyle("rgb(237, 239, 174)")(ctx)();
-                  var v3 = Graphics_Canvas.setFillStyle("rgb(250, 10, 10)")(ctx)();
+                  var v2 = Graphics_Canvas.setStrokeStyle("rgb(19, 70, 137)")(ctx)();
                   return Data_Functor["void"](Control_Monad_Eff.functorEff)(Control_Monad_Eff.forE(0)(6)(function (i) {
                       var m_i_face = Data_Array.index(faces)(i);
                       var i_face = Data_Maybe.fromMaybe([  ])(m_i_face);
@@ -1022,14 +973,14 @@ var PS = {};
                       var f2 = Data_Maybe.fromMaybe(0)(mf2);
                       var f3 = Data_Maybe.fromMaybe(0)(mf3);
                       return function __do() {
-                          var v4 = Data_Array_ST.peekSTArray(v1)(f0)();
-                          var v5 = Data_Array_ST.peekSTArray(v1)(f1)();
-                          var v6 = Data_Array_ST.peekSTArray(v1)(f2)();
-                          var v7 = Data_Array_ST.peekSTArray(v1)(f3)();
-                          var v0 = Data_Maybe.fromMaybe([  ])(v4);
-                          var v11 = Data_Maybe.fromMaybe([  ])(v5);
-                          var v21 = Data_Maybe.fromMaybe([  ])(v6);
-                          var v31 = Data_Maybe.fromMaybe([  ])(v7);
+                          var v3 = Data_Array_ST.peekSTArray(v1)(f0)();
+                          var v4 = Data_Array_ST.peekSTArray(v1)(f1)();
+                          var v5 = Data_Array_ST.peekSTArray(v1)(f2)();
+                          var v6 = Data_Array_ST.peekSTArray(v1)(f3)();
+                          var v0 = Data_Maybe.fromMaybe([  ])(v3);
+                          var v11 = Data_Maybe.fromMaybe([  ])(v4);
+                          var v21 = Data_Maybe.fromMaybe([  ])(v5);
+                          var v31 = Data_Maybe.fromMaybe([  ])(v6);
                           var mv00 = Data_Array.index(v0)(0);
                           var mv01 = Data_Array.index(v0)(1);
                           var mv10 = Data_Array.index(v11)(0);
@@ -1046,10 +997,9 @@ var PS = {};
                           var v211 = Data_Maybe.fromMaybe(0.0)(mv21);
                           var v30 = Data_Maybe.fromMaybe(0.0)(mv30);
                           var v311 = Data_Maybe.fromMaybe(0.0)(mv31);
-                          fill(v00)(v01)(v10)(v111)(v20)(v211)(v30)(v311)(ctx)();
                           stroke(v00)(v01)(v10)(v111)(v20)(v211)(v30)(v311)(ctx)();
-                          var v8 = Data_Array_ST.emptySTArray();
-                          return Data_Functor["void"](Control_Monad_Eff.functorEff)(Data_Array_ST.pushSTArray(v8)(1))();
+                          var v7 = Data_Array_ST.emptySTArray();
+                          return Data_Functor["void"](Control_Monad_Eff.functorEff)(Data_Array_ST.pushSTArray(v7)(1))();
                       };
                   }))();
               };
@@ -1059,7 +1009,6 @@ var PS = {};
   var deceleration = 0.92;
   exports["deceleration"] = deceleration;
   exports["drawCube"] = drawCube;
-  exports["fill"] = fill;
   exports["multiply"] = multiply;
   exports["oadd"] = oadd;
   exports["project"] = project;
