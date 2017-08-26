@@ -1,6 +1,6 @@
 # juspay-project
 
-#Rotating Cube wireframe: 
+# Rotating Cube wireframe: 
 
   Draw a 3D Cube wireframe and rotate it along ​the​ ax​es​ that passes through its center. The rotating object should decelerate at a rate of ‘X’ degrees/sec​^​2 before it comes to a standstill.
   The object should respond as follows to the following user inputs
