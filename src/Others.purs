@@ -39,6 +39,44 @@ project x y z = do
     [xRotQzQxQy, yRotQzQxQy] :: Array Number
 
 
+func i faces verticesPixLoc ctx = do
+    let m_i_face = faces !! i
+    let i_face = fromMaybe [] m_i_face
+    let mf0 = i_face !! 0
+    let mf1 = i_face !! 1
+    let mf2 = i_face !! 2
+    let mf3 = i_face !! 3
+    let f0 = fromMaybe 0 mf0
+    let f1 = fromMaybe 0 mf1
+    let f2 = fromMaybe 0 mf2
+    let f3 = fromMaybe 0 mf3
+    mv0 <- peekSTArray verticesPixLoc f0
+    mv1 <- peekSTArray verticesPixLoc f1
+    mv2 <- peekSTArray verticesPixLoc f2
+    mv3 <- peekSTArray verticesPixLoc f3
+    let v0 = fromMaybe [] mv0
+    let v1 = fromMaybe [] mv1
+    let v2 = fromMaybe [] mv2
+    let v3 = fromMaybe [] mv3
+    let mv00 = v0 !! 0
+    let mv01 = v0 !! 1
+    let mv10 = v1 !! 0
+    let mv11 = v1 !! 1
+    let mv20 = v2 !! 0
+    let mv21 = v2 !! 1
+    let mv30 = v3 !! 0
+    let mv31 = v3 !! 1
+    let v00 = fromMaybe 0.0 mv00
+    let v01 = fromMaybe 0.0 mv01
+    let v10 = fromMaybe 0.0 mv10
+    let v11 = fromMaybe 0.0 mv11
+    let v20 = fromMaybe 0.0 mv20
+    let v21 = fromMaybe 0.0 mv21
+    let v30 = fromMaybe 0.0 mv30
+    let v31 = fromMaybe 0.0 mv31
+    stroke v00 v01 v10 v11 v20 v21 v30 v31 ctx
+    r <- emptySTArray
+    void $ pushSTArray r 1
 
 drawCube vertices faces ctx = do
     _ <- clearRect ctx { x: 0.0, y: 0.0, w: 650.0, h: 650.0 }
@@ -62,44 +100,7 @@ drawCube vertices faces ctx = do
 
       void $ pushSTArray verticesPixLoc [pix0,pix1]
 
-    _ <- setStrokeStyle "rgb(66, 134, 244)" ctx
+    _ <- setStrokeStyle "#1409ed" ctx
     void $ forE 0 6 $ \i ->  do
-
-      let m_i_face = faces !! i
-      let i_face = fromMaybe [] m_i_face
-      let mf0 = i_face !! 0
-      let mf1 = i_face !! 1
-      let mf2 = i_face !! 2
-      let mf3 = i_face !! 3
-      let f0 = fromMaybe 0 mf0
-      let f1 = fromMaybe 0 mf1
-      let f2 = fromMaybe 0 mf2
-      let f3 = fromMaybe 0 mf3
-      mv0 <- peekSTArray verticesPixLoc f0
-      mv1 <- peekSTArray verticesPixLoc f1
-      mv2 <- peekSTArray verticesPixLoc f2
-      mv3 <- peekSTArray verticesPixLoc f3
-      let v0 = fromMaybe [] mv0
-      let v1 = fromMaybe [] mv1
-      let v2 = fromMaybe [] mv2
-      let v3 = fromMaybe [] mv3
-      let mv00 = v0 !! 0
-      let mv01 = v0 !! 1
-      let mv10 = v1 !! 0
-      let mv11 = v1 !! 1
-      let mv20 = v2 !! 0
-      let mv21 = v2 !! 1
-      let mv30 = v3 !! 0
-      let mv31 = v3 !! 1
-      let v00 = fromMaybe 0.0 mv00
-      let v01 = fromMaybe 0.0 mv01
-      let v10 = fromMaybe 0.0 mv10
-      let v11 = fromMaybe 0.0 mv11
-      let v20 = fromMaybe 0.0 mv20
-      let v21 = fromMaybe 0.0 mv21
-      let v30 = fromMaybe 0.0 mv30
-      let v31 = fromMaybe 0.0 mv31
-      stroke v00 v01 v10 v11 v20 v21 v30 v31 ctx
-      r <- emptySTArray
-      void $ pushSTArray r 1
-deceleration = 0.92
+     func  i faces verticesPixLoc ctx
+deceleration = 0.9
