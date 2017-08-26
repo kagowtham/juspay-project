@@ -28,7 +28,28 @@ import Mouse
 import Rotate
 import Others
 
-
+updater st_vertices x_angle y_angle t i = do
+  mvi <- peekSTArray st_vertices i
+  let vi = fromMaybe [] mvi
+  let mx = vi !! 0
+  let my = vi !! 1
+  let mz = vi !! 2
+  let x = fromMaybe 0.0 mx
+  let y = fromMaybe 0.0 my
+  let z = fromMaybe 0.0 mz
+  yangle <- readSTRef y_angle
+  xangle <- readSTRef x_angle
+  let v = rotateX (yangle*50.0) x y z
+  let mvx = v !! 0
+  let mvy = v !! 1
+  let mvz = v !! 2
+  let vx = fromMaybe 0.0 mvx
+  let vy = fromMaybe 0.0 mvy
+  let vz = fromMaybe 0.0 mvz
+  let vv = rotateY (50.0*xangle) vx vy vz
+  void $ pushSTArray t vv
+  r <- emptySTArray
+  void $ pushSTArray r 1
 
 main = void $ unsafePartial do
   Just canvas <- getCanvasElementById "canvas"
@@ -90,27 +111,7 @@ main = void $ unsafePartial do
             r <- emptySTArray
             void $ pushSTArray r 1
         void $ forE 0 8 $ \i ->  do
-          mvi <- peekSTArray st_vertices i
-          let vi = fromMaybe [] mvi
-          let mx = vi !! 0
-          let my = vi !! 1
-          let mz = vi !! 2
-          let x = fromMaybe 0.0 mx
-          let y = fromMaybe 0.0 my
-          let z = fromMaybe 0.0 mz
-          yangle <- readSTRef y_angle
-          xangle <- readSTRef x_angle
-          let v = rotateX (yangle*50.0) x y z
-          let mvx = v !! 0
-          let mvy = v !! 1
-          let mvz = v !! 2
-          let vx = fromMaybe 0.0 mvx
-          let vy = fromMaybe 0.0 mvy
-          let vz = fromMaybe 0.0 mvz
-          let vv = rotateY (50.0*xangle) vx vy vz
-          void $ pushSTArray t vv
-          r <- emptySTArray
-          void $ pushSTArray r 1
+          updater st_vertices x_angle y_angle t i
         drawCube t faces ctx
         requestAnimationFrame updateCube
 
