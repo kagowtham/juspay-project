@@ -16,8 +16,6 @@ multiply a b = a * b
 
 oadd a b = a + b
 
-
-
 stroke v00 v01 v10 v11 v20 v21 v30 v31 ctx = do
   r <- emptySTArray
   _ <- strokePath ctx $ do
@@ -64,8 +62,7 @@ drawCube vertices faces ctx = do
 
       void $ pushSTArray verticesPixLoc [pix0,pix1]
 
-    _ <- setStrokeStyle "rgb(19, 70, 137)" ctx
-
+    _ <- setStrokeStyle "rgb(66, 134, 244)" ctx
     void $ forE 0 6 $ \i ->  do
 
       let m_i_face = faces !! i
@@ -102,7 +99,6 @@ drawCube vertices faces ctx = do
       let v21 = fromMaybe 0.0 mv21
       let v30 = fromMaybe 0.0 mv30
       let v31 = fromMaybe 0.0 mv31
-
       stroke v00 v01 v10 v11 v20 v21 v30 v31 ctx
       r <- emptySTArray
       void $ pushSTArray r 1

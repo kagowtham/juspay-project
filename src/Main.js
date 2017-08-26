@@ -960,7 +960,7 @@ var PS = {};
                           return Data_Functor["void"](Control_Monad_Eff.functorEff)(Data_Array_ST.pushSTArray(v1)([ pix0, pix1 ]))();
                       };
                   }))();
-                  var v2 = Graphics_Canvas.setStrokeStyle("rgb(19, 70, 137)")(ctx)();
+                  var v2 = Graphics_Canvas.setStrokeStyle("rgb(66, 134, 244)")(ctx)();
                   return Data_Functor["void"](Control_Monad_Eff.functorEff)(Control_Monad_Eff.forE(0)(6)(function (i) {
                       var m_i_face = Data_Array.index(faces)(i);
                       var i_face = Data_Maybe.fromMaybe([  ])(m_i_face);
