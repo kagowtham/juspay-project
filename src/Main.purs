@@ -47,8 +47,8 @@ main = void $ unsafePartial do
   dz <- newSTRef 0.0
   x_angle <- newSTRef 0.0
   y_angle <- newSTRef 0.0
-  let sz = 50.0
-  let msz = -50.0
+  let sz = 60.0
+  let msz = -60.0
   let vertices = [
         [msz, sz, msz],
         [sz, sz, msz],
